@@ -1062,11 +1062,90 @@ const orderUpdation=(action,orderId,prodId)=>{
 
 
 
+const invoice=(orderId,productId,addressId,customerId)=>{
+   return Address.aggregate([
+      [
+        {
+          '$match': {
+            'customer':ObjectId(customerId)
+          }
+        }, {
+          '$unwind': {
+            'path': '$address'
+          }
+        }, {
+          '$match': {
+            'address._id':ObjectId(addressId)
+          }
+        }, {
+          '$lookup': {
+            'from': 'orders', 
+            'localField': 'address._id', 
+            'foreignField': 'addressId', 
+            'as': 'orderLookup'
+          }
+        }, {
+          '$lookup': {
+            'from': 'users', 
+            'localField': 'customer', 
+            'foreignField': '_id', 
+            'as': 'customerLookup'
+          }
+        }, {
+          '$unwind': {
+            'path': '$orderLookup'
+          }
+        },{
+          '$match': {
+            'orderLookup._id': ObjectId(orderId)
+          }
+        }, {
+          '$unwind': {
+            'path': '$customerLookup'
+          }
+        }, {
+          '$unwind': {
+            'path': '$orderLookup.items'
+          }
+        }, {
+          '$match': {
+            'orderLookup.items.productId':ObjectId(productId)
+          }
+        }, {
+          '$lookup': {
+            'from': 'products', 
+            'localField': 'orderLookup.items.productId', 
+            'foreignField': '_id', 
+            'as': 'productLookup'
+          }
+        }, {
+          '$unwind': {
+            'path': '$productLookup'
+          }
+        }, {
+          '$lookup': {
+            'from': 'users', 
+            'localField': 'productLookup.createdBy', 
+            'foreignField': '_id', 
+            'as': 'vendorLookup'
+          }
+        }, {
+          '$unwind': {
+            'path': '$vendorLookup'
+          }
+        }
+      ]
+    ])
+}
+
+
+
 module.exports={
     createOrder,
     generateRazorpay,
     verifyPayment,
     orders,
     vendorOrders,
-    orderUpdation
+    orderUpdation,
+    invoice
 }

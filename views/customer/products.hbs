@@ -268,9 +268,13 @@
                         {{#each filterRender.filterData}}
                         <div class="col-lg-4 col-sm-6">
                             <div class="single_product_item">
-                                <img src="/uploads/{{this.productPictures.[0].filename}}" alt="">
+                                <a href="/single-view/{{this._id}}">
+                                    <img src="/uploads/{{this.productPictures.[0].filename}}" alt="">
+                                </a>
                                 <div class="single_product_text">
-                                    <h4>{{this.name}}</h4>
+                                    <a href="/single-view/{{this._id}}">
+                                        <h4>{{this.name}}</h4>
+                                    </a>
                                     <h3>Rs {{this.price}}</h3>
                                     {{#if this.outOfStock}}
                                     <p style="color:red;">Out of stock</p>

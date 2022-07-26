@@ -126,6 +126,13 @@ router.get
         customerController.orderSuccess
     )
 
+router.get
+    (
+        '/invoice/:orderId/:productId/:addressId',
+        verifyLogin.verifyCustomerLogin,
+        customerController.invoice
+    )
+
 
 
 module.exports = router;

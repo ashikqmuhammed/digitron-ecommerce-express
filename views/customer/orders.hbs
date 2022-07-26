@@ -47,6 +47,10 @@ background: linear-gradient(to top left, rgb(255, 255, 255), rgba(246, 243, 255,
                     <p class="text-muted mb-0 small">Rs {{this.items.payablePrice}}</p>
                   </div>
                 </div>
+                {{#if this.delivered}}
+                <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                  <a href="/invoice/{{this._id}}/{{this.productLookup._id}}/{{this.addressId}}" class="btn btn-dark btn-block">Invoice</a>
+                {{/if}}
                 <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
                 <div class="row d-flex align-items-center">
                   <div class="col-md-2">

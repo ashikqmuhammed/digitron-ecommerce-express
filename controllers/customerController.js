@@ -526,6 +526,27 @@ const orderSuccess=async(req,res,next)=>{
 
 
 
+const invoice=async(req,res,next)=>{
+  try {
+    const{orderId,productId,addressId}=req.params
+    const renderDatas={}
+    const invoiceFirst=orderId.slice(20,24)
+    const invoiceSecond=productId.slice(20,24)
+    const temp=`${invoiceFirst}${invoiceSecond}`
+    const invoiceId=temp.toUpperCase()
+    renderDatas.invoiceId=invoiceId
+    const {_id}=req.session.userData
+    const invoiceData=await orderDb.invoice(orderId,productId,addressId,_id)
+    renderDatas.invoiceData=invoiceData
+    renderDatas.layout='customer-layout'
+    res.render('customer/invoice',renderDatas)
+  } catch (error) {
+    next(error)
+  }
+}
+
+
+
   
 
 
@@ -548,5 +569,6 @@ const orderSuccess=async(req,res,next)=>{
       placeOrder,
       verifyPayment,
       orders,
-      orderSuccess
+      orderSuccess,
+      invoice
     }

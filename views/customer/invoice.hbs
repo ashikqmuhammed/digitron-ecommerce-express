@@ -1,0 +1,136 @@
+<style>
+    body{margin-top:100px;
+background:#eee;
+}
+
+.invoice {
+    padding: 30px;
+}
+
+.invoice h2 {
+	margin-top: 0px;
+	line-height: 0.8em;
+}
+
+.invoice .small {
+	font-weight: 300;
+}
+
+.invoice hr {
+	margin-top: 10px;
+	border-color: #ddd;
+}
+
+.invoice .table tr.line {
+	border-bottom: 1px solid #ccc;
+}
+
+.invoice .table td {
+	border: none;
+}
+
+.invoice .identity {
+	margin-top: 10px;
+	font-size: 1.1em;
+	font-weight: 300;
+}
+
+.invoice .identity strong {
+	font-weight: 600;
+}
+
+
+.grid {
+    position: relative;
+	width: 100%;
+	background: #fff;
+	color: #666666;
+	border-radius: 2px;
+	margin-bottom: 25px;
+	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+</style>
+
+
+<div class="container">
+<div class="row">
+    				<!-- BEGIN INVOICE -->
+					<div class="col-xs-12 ">
+						<div class="grid invoice">
+							<div class="grid-body">
+								<div class="invoice-title">
+									<div class="row">
+										<div class="col-xs-12">
+											<img src="/customer/img/logo.png" alt="" height="35">
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-xs-12">
+											<h2>invoice<br>
+											<span class="small">order #{{invoiceId}}</span></h2>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-xs-6">
+										<address>
+											<strong>Shipped To:</strong><br>
+											{{invoiceData.[0].address.name}}<br>
+											{{invoiceData.[0].address.address}},<br>
+											{{invoiceData.[0].address.cityDistrictTown}}, {{invoiceData.[0].address.pinCode}}<br>
+											<abbr title="Phone">Mob:</abbr> {{invoiceData.[0].address.mobileNumber}}
+										</address>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-6">
+										<address>
+											<strong>Payment Type:</strong><br>
+											{{invoiceData.[0].orderLookup.paymentType}}
+										</address>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<h3>ORDER SUMMARY</h3>
+										<table class="table table-striped">
+											<thead>
+												<tr class="line">
+                                                    <td class="text-center"><strong>IMAGE</strong></td>
+													<td class="text-center"><strong>PRODUCT</strong></td>
+													<td class="text-center"><strong>QTY</strong></td>
+													<td class="text-right"><strong>PRICE</strong></td>
+													<td class="text-right"><strong>TOTAL</strong></td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+                                                    <td> <img
+                                                        src="/uploads/{{invoiceData.[0].productLookup.productPictures.[0].filename}}"
+                                                        style="width: 50px ;height=50px"
+                                                        alt=""
+                                                    />
+                                                    </td>													
+													<td><strong>{{invoiceData.[0].productLookup.name}}</strong>
+													<td class="text-center">{{invoiceData.[0].orderLookup.items.purchasedQty}}</td>
+													<td class="text-center">{{invoiceData.[0].productLookup.price}} Rs</td>
+													<td class="text-right">{{invoiceData.[0].orderLookup.items.payablePrice}} Rs</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>									
+								</div>
+								<div class="row">
+									<div class="col-md-12 text-right identity pr-5">
+										<p>Seller<br><strong>{{invoiceData.[0].vendorLookup.fullName}}</strong></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END INVOICE -->
+				</div>
+</div>

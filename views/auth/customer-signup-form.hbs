@@ -165,10 +165,10 @@
           check_retype_password();
 
           if(error_name===false && error_email===false && error_password===false && error_retype_password===false){
-            alert('Success')
+            console.log('success')
             return true
           }else{
-            alert("Please fill form correctly")
+            console.log('failed')
             return false
           }
         });
