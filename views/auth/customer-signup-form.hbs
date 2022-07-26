@@ -1,0 +1,181 @@
+<!--================login_part Area =================-->
+    <section class="login_part padding_top">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="login_part_text text-center">
+                        <div class="login_part_text_iner">
+                            <h2>Already have an account?</h2>
+                            <p>There are advances being made in science and technology
+                                everyday, and a good example of this is the</p>
+                            <a href="/auth" class="btn_3">Login now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="login_part_form">
+                        <div class="login_part_form_iner">
+                            <h3>Welcome! <br>
+                                Sign up now</h3>
+                          
+                            {{#if customerExist}}
+                            <p class="errormessage text-danger" style="padding-left: 25px ;">Email already exists. Signin!</p>
+                            {{/if}}
+                            <form class="row contact_form" action="/auth/otp" method="post" id="registration_form" novalidate="novalidate">
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="form_name" name="fullName"
+                                        placeholder="Name">
+                                    <span id="name_error_message"></span>
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="email" class="form-control" id="form_email" name="email" 
+                                        placeholder="Email">
+                                    <span id="email_error_message"></span>  
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="password" class="form-control" id="form_password" name="password"
+                                        placeholder="Password">
+                                    <span id="password_error_message"></span>
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="password" class="form-control" id="form_retype_password" name="retype_password"
+                                        placeholder="Re-enter password">
+                                    <span id="retype_password_error_message"></span>
+                                </div>
+                                {{!-- hidden input --}}
+                                <input hidden type="text" name="vendor" value="false">
+                                {{!-- hidden input --}}
+                                <div class="col-md-12 form-group">
+                                    <div class="creat_account d-flex align-items-center">
+                                        <input type="checkbox" id="f-option" name="selector">
+                                        <label for="f-option">Remember me</label>
+                                    </div>
+                                    <button type="submit" value="submit" class="btn_3">
+                                        Register
+                                    </button>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================login_part end =================-->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+      $(function(){
+
+        $("#name_error_message").hide();
+        $("#email_error_message").hide();
+        $("#password_error_message").hide();
+        $("#retype_password_error_message").hide();
+
+        let error_name=false;
+        let error_email=false;
+        let error_password=false;
+        let error_retype_password=false;
+
+        $("#form_name").focusout(function(){
+          check_name();
+        });
+        $("#form_email").focusout(function(){
+          check_email();
+        });
+        $("#form_password").focusout(function(){
+          check_password();
+        });
+        $("#form_retype_password").focusout(function(){
+          check_retype_password();
+        });
+
+        function check_name(){
+          const pattern=/^[a-zA-Z]*$/;
+          const name=$("#form_name").val();
+          const length=$("#form_name").val().length;
+          if(pattern.test(name) && name !== '' && length>=3){
+            $("#name_error_message").hide();
+            $("#form_name").css("border-bottom","2px solid #34F458");
+          }else if(length<3){
+            $("#name_error_message").html("Should contain atleast 3 charecters");
+            $("#name_error_message").show();
+            $("#form_name").css("border-bottom","2px solid #F90A0A");
+            error_name=true;
+          }else{
+            $("#name_error_message").html("Should contain only charecters");
+            $("#name_error_message").show();
+            $("#form_name").css("border-bottom","2px solid #F90A0A");
+            error_name=true;
+          }
+        }
+
+        function check_password(){
+          const password_length=$("#form_password").val().length;
+          if(password_length<8){
+            $("#password_error_message").html("Atleast 8 charecters");
+            $("#password_error_message").show();
+            $("#form_password").css("border-bottom","2px solid #F90A0A");
+            error_password=true;
+          }else{
+            $("#password_error_message").hide();
+            $("#form_password").css("border-bottom","2px solid #34F458");
+          }
+        }
+
+        function check_retype_password(){
+          const password=$("#form_password").val();
+          const retype_password=$("#form_retype_password").val();
+          if(password !== retype_password){
+            $("#retype_password_error_message").html("Password did not matched");
+            $("#retype_password_error_message").show();
+            $("#form_retype_password").css("border-bottom","2px solid #F90A0A");
+            error_retype_password=true;
+          }else{
+            $("#retype_password_error_message").hide();
+            $("#form_retype_password").css("border-bottom","2px solid #34F458");
+          }
+        }
+
+        function check_email(){
+          const pattern=/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+          const email=$("#form_email").val();
+          if(pattern.test(email) && email !== ''){
+            $("#email_error_message").hide();
+            $("#form_email").css("border-bottom","2px solid #34F458");
+          }else{
+            $("#email_error_message").html("Invalid email");
+            $("#email_error_message").show();
+            $("#form_email").css("border-bottom","2px solid #F90A0A");
+            error_email=true;
+          }
+        }
+
+        $("#registration_form").submit(function(){
+          error_name=false;
+          error_email=false;
+          error_password=false;
+          error_retype_password=false;
+
+          check_name();
+          check_email();
+          check_password();
+          check_retype_password();
+
+          if(error_name===false && error_email===false && error_password===false && error_retype_password===false){
+            alert('Success')
+            return true
+          }else{
+            alert("Please fill form correctly")
+            return false
+          }
+        });
+
+      });
+        
+    </script>
+
+
+

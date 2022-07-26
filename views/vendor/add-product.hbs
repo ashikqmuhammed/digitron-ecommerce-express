@@ -1,0 +1,202 @@
+<!-- Category -->
+<div class="orders mt-5 p-5">
+    <div class="row">
+        <div class="col-xl-11 mx-auto category-top">
+            <div class="card">
+                <div class="full_container">
+                    <div class="inner_container">
+                        <!-- dashboard inner -->
+                        <h2 class="text-center mt-5 pt-5">Add Product</h2>
+                        <div class="w-75 mx-auto mt-5">
+                            <form class="p-5 border mb-5" action="/vendor/add-product/{{id}}" method="post" enctype="multipart/form-data" id="add_product">
+                                <div class="form-group">
+                                    <label for="inputProduct4">Product Name</label>
+                                    <input type="text" class="form-control inpfield" placeholder="Product Name"
+                                        name="name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputProduct4">Description</label>
+                                    <textarea required type="text" id="defaultRegisterFormEmail" class="form-control"
+                                        placeholder="Description" name="description"></textarea>
+                                </div>
+                                <div class="form-row mb-3">
+
+                                
+                                    <div class="form-group col-md-6">
+                                        <label for="inputBrand4">Brand Name</label>
+                                        <input type="text" class="form-control inpfield" name="brandName"
+                                            placeholder="Brand Name">
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-6">
+                                        <label for="inputStock4">Quantity</label>
+                                        <input required type="number" class="form-control inpfield" name="quantity"
+                                            placeholder="Stock">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPricek4">Price</label>
+                                        <input required type="Price" class="form-control inpfield" name="price"
+                                            placeholder="Price">
+                                    </div>
+                                </div>
+                                <div class="form-row form_img">
+                                    <div class="grid">
+                                        <div class="form-element">
+                                            <input required type="file" id="file-1" accept="image/*" name="images">
+                                            <label for="file-1" id="file-1-preview">
+                                                <img src="https://bit.ly/3ubuq5o" alt="">
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-element">
+                                            <input required type="file" id="file-2" accept="image/*" name="images">
+                                            <label for="file-2" id="file-2-preview">
+                                                <img src="https://bit.ly/3ubuq5o" alt="">
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-element">
+                                            <input required type="file" id="file-3" accept="image/*" name="images">
+                                            <label for="file-3" id="file-3-preview">
+                                                <img src="https://bit.ly/3ubuq5o" alt="">
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-element">
+                                            <input required type="file" id="file-4" accept="image/*" name="images">
+                                            <label for="file-4" id="file-4-preview">
+                                                <img src="https://bit.ly/3ubuq5o" alt="">
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center mt-5">
+                                    <input type="submit" class="btn btn-primary">
+                                    {{!-- <button  class="btn btn-primary">Add Product</button> --}}
+                                    
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <!-- end dashboard inner -->
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- /.card -->
+    </div> <!-- /.col-lg-8 -->
+</div>
+</div>
+<!-- /.Category -->
+<script>
+    function previewBeforeUpload(id) {
+        document.querySelector("#" + id).addEventListener("change", function (e) {
+            if (e.target.files.length == 0) {
+                return;
+            }
+            let file = e.target.files[0];
+            let url = URL.createObjectURL(file);
+            document.querySelector("#" + id + "-preview div").innerText = file.name;
+            document.querySelector("#" + id + "-preview img").src = url;
+        });
+    }
+
+    previewBeforeUpload("file-1");
+    previewBeforeUpload("file-2");
+    previewBeforeUpload("file-3");
+    previewBeforeUpload("file-4");
+</script>
+
+
+{{!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+
+<script>
+  $("#add_product").validate();
+</script> --}}
+
+
+
+
+
+{{!-- <div class="card-body--">
+    <div class="table-stats order-table ov-h">
+        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>index</th>
+                    <th>Name</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data}}
+                <tr>
+                    <td class="create_index">{{ inc @index}} </td>
+
+                    <td><input id="btnp" class="border-0" type="text" value="{{this.category}}" disabled></td>
+                    <td> <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#exampleModal{{this._id}}">
+                            Edit button
+                        </button>
+                    </td>
+
+
+
+                    <td><a href="/admin/delete-category/{{this._id}}"><button type="button"
+                                class="btn btn-danger">Delete</button></a></td>
+                    <td>
+                        <span class="products">View Products</span>
+                    </td>
+                    </td>
+                </tr>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/admin/update-category/{{this._id}}" method="post">
+                                    <input type="text" value="{{this.category_name}}" name="edit">
+                                    <input type="submit" class="btn btn-primary">
+                                </form>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+            </tbody>
+        </table>
+    </div> <!-- /.table-stats -->
+</div> --}}

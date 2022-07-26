@@ -1,0 +1,359 @@
+<form action="/vendor/addcategory" method="post">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          name="category"
+          class="form-control"
+          placeholder="Send request to add category"
+          aria-label="Recipient's username"
+          aria-describedby="basic-addon2"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit">Send</button>
+        </div>
+      </div>
+    </form>
+
+{{#if activeCatData}}
+{{!-- SHOW ALL CATEGORY  LIST STARTS--}}
+        <div class="dash-container mt-5 p-4">
+          <h4 class="text-center mb-5">Active Product Categories</h4>
+<section >
+
+   <div class="container shadow p-2">
+      
+        <table class="table " id="active_cat" >
+  <thead>
+    <tr>
+      
+      <th scope="col">INDEX</th>
+      <th scope="col">CATEGORY</th>
+      <th scope="col">UPDATE</th>
+      <th scope="col">VIEW</th>
+      
+       
+      
+    </tr>
+  </thead>
+  <tbody>
+      {{#each activeCatData}}
+    <tr>
+     
+      <td>{{inc @index}}</td>
+      <td> {{this._id}}</td>
+      <td>{{! modal button }}
+
+                                <button
+                                  type="submit"
+                                  class="btn btn-primary"
+                                  data-toggle="modal"
+                                  data-target="#exampleModal{{this._id}}"
+                                >
+                                  Update
+                                </button>
+      </td>
+      
+      {{!-- <td>
+       <a href="" class="mr-2 btn btn-success" >Mark as packed</a>
+      </td> --}}
+      <td>
+        <a href="/vendor/view-products/{{this._id}}" class="ml-3 btn btn-primary" >View</a>
+      </td>
+    </tr>
+
+       <!-- Modal -->
+                          <div
+                            class="modal fade"
+                            id="exampleModal{{this._id}}"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="exampleModalLabel"
+                            aria-hidden="true"
+                          >
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5
+                                    class="modal-title"
+                                    id="exampleModalLabel"
+                                  >Send Category Edit Request</h5>
+                                  <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                  >
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+
+                                  {{! Categories add box }}
+
+                                  <form
+                                    class="form-inline mb-5 mt-5"
+                                    method="post"
+                                    action="/vendor/update-cat-req/{{this._id}}"
+                                  >
+
+                                    <div class="form-group mx-sm-3 mb-2">
+                                      {{! <label for="inputPassword2" class="sr-only">Password</label> }}
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        value="{{this._id}}"
+                                        name="editTo"
+                                        id=""
+                                        placeholder="Update categories"
+                                      />
+                                    </div>
+                                    <button
+                                      type="submit"
+                                      class="btn btn-primary mb-2"
+                                    >Send</button>
+                                  </form>
+                                </div>
+                                <div class="modal-footer">
+
+                                  <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-dismiss="modal"
+                                  >Close</button>
+                                  {{! <button type="button" class="btn btn-primary">Save changes</button>  }}
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+    
+    {{/each}}
+   
+  </tbody>
+</table>
+   </div>
+</section>
+
+
+<script>
+  $(document).ready(function () {
+
+
+    $('#user_table').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#active_cat').DataTable();
+</script>
+        </div>
+        
+ {{!-- SHOW ALL CATEGORY  LIST ends--}}
+{{/if}}
+
+
+{{#if inactiveCatData}}
+{{!-- SHOW ALL CATEGORY  LIST STARTS--}}
+        <div class="dash-container mt-5 p-4">
+          <h4 class="text-center mb-5">Inactive Product Categories</h4>
+<section >
+
+   <div class="container shadow p-2">
+      
+        <table class="table " id="inactive_cat" >
+  <thead>
+    <tr>
+      
+      <th scope="col">INDEX</th>
+      <th scope="col">CATEGORY</th>
+      <th scope="col">UPDATE</th>
+      <th scope="col">VIEW</th>
+      
+       
+      
+    </tr>
+  </thead>
+  <tbody>
+      {{#each inactiveCatData}}
+    <tr>
+     
+      <td>{{inc @index}}</td>
+      <td> {{this._id}}</td>
+      
+       <td>{{! modal button }}
+
+                                <button
+                                  type="submit"
+                                  class="btn btn-primary"
+                                  data-toggle="modal"
+                                  data-target="#exampleModal{{this._id}}"
+                                >
+                                  Update
+                                </button></td>
+      <td>
+        <a href="/vendor/view-products/{{this._id}}" class="ml-3 btn btn-primary" >View</a>
+      </td>
+    </tr>
+
+       <!-- Modal -->
+                          <div
+                            class="modal fade"
+                            id="exampleModal{{this._id}}"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="exampleModalLabel"
+                            aria-hidden="true"
+                          >
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5
+                                    class="modal-title"
+                                    id="exampleModalLabel"
+                                  >Send Category Edit Request</h5>
+                                  <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                  >
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+
+                                  {{! Categories add box }}
+
+                                  <form
+                                    class="form-inline mb-5 mt-5"
+                                    method="post"
+                                    action="/vendor/update-cat-req/{{this._id}}"
+                                  >
+
+                                    <div class="form-group mx-sm-3 mb-2">
+                                      {{! <label for="inputPassword2" class="sr-only">Password</label> }}
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        value="{{this._id}}"
+                                        name="editTo"
+                                        id=""
+                                        placeholder="Update categories"
+                                      />
+                                    </div>
+                                    <button
+                                      type="submit"
+                                      class="btn btn-primary mb-2"
+                                    >Send</button>
+                                  </form>
+                                </div>
+                                <div class="modal-footer">
+
+                                  <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-dismiss="modal"
+                                  >Close</button>
+                                  {{! <button type="button" class="btn btn-primary">Save changes</button>  }}
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+    
+    {{/each}}
+   
+  </tbody>
+</table>
+   </div>
+</section>
+
+
+<script>
+  $(document).ready(function () {
+
+
+    $('#user_table').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#inactive_cat').DataTable();
+</script>
+        </div>
+        
+ {{!-- SHOW ALL CATEGORY  LIST ends--}}
+{{/if}}
+
+
+    <!-- sweet alert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11 -->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>        
+
+    {{!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11 -->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script> --}}
+
+
+{{#if categoryExist}}
+
+<script>
+  flash()
+  function flash(){
+ Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Category already exists or blocked by admin',
+})
+  }
+ 
+</script>
+
+{{/if}}
+
+{{#if catUpReq}}
+<script type="text/javascript">
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Updation request sent to Admin successfully'
+})
+</script>
+{{/if}}
+
+{{#if newCatReq}}
+<script type="text/javascript">
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'New category request sent to Admin successfully'
+})
+</script>
+{{/if}}

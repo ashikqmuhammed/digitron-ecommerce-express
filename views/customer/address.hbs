@@ -1,0 +1,139 @@
+<!--================Checkout Area =================-->
+  <section class="checkout_area padding_top">
+    <div class="container">
+      
+      {{!-- <div class="cupon_area">
+        <div class="check_title">
+          <h2>
+            Have a coupon?
+            <a href="#">Click here to enter your code</a>
+          </h2>
+        </div>
+        <input type="text" placeholder="Enter coupon code" />
+        <a class="tp_btn" href="#">Apply Coupon</a>
+      </div> --}}
+      <div class="billing_details">
+        <div class="row">
+          <div class="col-lg-8">
+
+
+                <div class="card mb-4">
+      <div class="card-header py-3">
+        <h5 class="mb-0">Shipping Address</h5>
+      </div>
+      <div class="card-body">
+        <form action="/address" method="post">
+          <!-- 2 column grid layout with text inputs for the first and last names -->
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input name="name" type="text" id="name" class="form-control" />
+                <label class="form-label" for="name">Name</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input name="mobileNumber" type="tel" id="mobileNumber" class="form-control" />
+                <label class="form-label" for="mobileNumber">Mobile Number</label>
+              </div>
+            </div>
+          </div>
+
+           <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input name="pinCode" type="tel" id="pinCode" class="form-control" />
+                <label class="form-label" for="pinCode">Pincode</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input name="locality" type="text" id="locality" class="form-control" />
+                <label class="form-label" for="locality">Locality</label>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Address input -->
+          <div class="form-outline mb-4">
+            <textarea name="address" class="form-control" id="address" rows="4"></textarea>
+            <label class="form-label" for="address">Address</label>
+          </div>
+
+
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input name="cityDistrictTown" type="text" id="cityDistrictTown" class="form-control" />
+                <label class="form-label" for="cityDistrictTown">City</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input name="state" type="text" id="state" class="form-control" />
+                <label class="form-label" for="state">State</label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input name="landmark" type="text" id="landmark" placeholder="Optional" class="form-control" />
+                <label class="form-label" for="landmark">Landmark</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input name="alternatePhone" type="text" id="alternatePhone" placeholder="Optional" class="form-control" />
+                <label class="form-label" for="alternatePhone">Alternate mobile number</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+          <div class="card-body">
+            <input href="/checkout" class="btn btn-dark btn-block btn-lg" type="submit" value="Save and Proceed">
+          </div>
+        </div>
+        
+        </form>
+      </div>
+    </div>
+
+           
+          </div>
+          <div class="col-lg-4">
+            <div class="order_box">
+              <h2>Price Details</h2>
+              <ul class="list list_2">
+                <li>
+                  <a href="#">Price
+                    <span>{{cartSubTotal.[0].subTotal}} Rs</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Delivery charges
+                    <span>40 Rs</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Total Amount
+                    <span>{{cartSubTotal.[0].totalAmount}} Rs</span>
+                  </a>
+                </li>
+              </ul>
+          
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Checkout Area =================-->
+
+
+
+

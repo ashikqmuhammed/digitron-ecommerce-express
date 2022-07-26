@@ -1,0 +1,81 @@
+{{!-- SHOW ALL CATEGORY  LIST STARTS--}}
+        <div class="dash-container mt-5 p-4">
+          <h4 class="text-center mb-5">{{name}}</h4>
+<section >
+
+   <div class="container shadow p-2">
+      
+        <table class="table " id="placed" >
+  <thead>
+    <tr>
+      <th scope="col">INDEX</th>
+      <th scope="col">NAME</th>
+      <th scope="col">PRICE</th>
+      <th scope="col">QTY</th>
+      <th scope="col">IMAGE</th>
+      <th scope="col">VIEW</th>
+      <th scope="col">UPDATE</th>
+      <th scope="col">BLOCK</th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#each productData}}
+    <tr>
+     
+      <td>{{inc @index}}</td>
+      <td> {{this.name}}</td>
+      <td> {{this.price }}</td>
+      <td> {{this.quantity}}</td>
+      <td> <img
+                                src="/uploads/{{this.productPictures.[0].filename}}"
+                                style="width: 50px ;height=50px"
+                                alt=""
+                              />
+      </td>
+      <td><a href="/single-view/{{this._id}}"><button class="btn btn-primary">View</button></a></td>
+      <td><a href="/vendor/update-product/{{this._id}}"><button class="btn btn-primary">Update</button></a></td>
+      <td><a href="/vendor/block-product/{{this._id}}/{{this.category}}"><button class="btn btn-primary">Block</button></a></td>
+
+    </tr>
+    
+    {{/each}}
+   
+  </tbody>
+</table>
+   </div>
+</section>
+
+
+<script>
+  $(document).ready(function () {
+
+
+    $('#user_table').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#placed').DataTable();
+</script>
+        </div>
+        
+ {{!-- SHOW ALL CATEGORY  LIST ends--}}
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="sweetalert2/dist/sweetalert2.all.min.js"></script>
+<!-- Include a polyfill for ES6 Promises (optional) for IE11 -->
+<script
+  src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"
+></script>
+
+{{#if categoryExist}}
+
+  <script>
+    flash() function flash(){ Swal.fire({ icon: 'error', title: 'Oops...', text:
+    'Category already exists or blocked by admin', }) }
+
+  </script>
+
+{{/if}}

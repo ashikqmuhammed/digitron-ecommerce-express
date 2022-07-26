@@ -1,0 +1,91 @@
+
+
+        <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">New Category Request</h1>
+            <ol class="breadcrumb">
+              {{!-- <li class="breadcrumb-item"><a href="./">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Dashboard</li> --}}
+            </ol>
+          </div>
+
+         <section class="intro">
+<form action="/vendor/addcategory" method="post">
+<div class="input-group mb-3">
+  <input type="text" name="category"  class="form-control" placeholder="Send request to add category" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit">Send</button>
+  </div>
+</div>
+</form>
+
+  <div class="bg-image h-100" style="background-color: #f5f7fa;">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body p-0">
+                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height: 700px">
+                  <table class="table table-striped mb-0">
+                    <thead style="background-color: #002d72;">
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Access</th>
+                        <th scope="col">Hold</th>
+                        <th scope="col">Permenant Delete</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{#each categoryData}}
+                      <tr>
+                        <td>{{this.name}}</td>
+                        <td><a href="/admin/give-access/{{this._id}}/{{this.requestedBy}}"><button>Give Access</button></a></td>
+                        <td><a href="/admin/hold-access/{{this._id}}/{{this.requestedBy}}"><button>Hold</button></a></td>
+                        <td><a href="/admin/delete-new-cat/{{this._id}}/{{this.requestedBy}}"><button>Delete</button></a></td>
+                        
+                      </tr>
+                      {{/each}}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+          <!-- Modal Logout -->
+          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to logout?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                  <a href="login.html" class="btn btn-primary">Logout</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!---Container Fluid-->
+     
+      
+ 
+
+

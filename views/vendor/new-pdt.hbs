@@ -1,0 +1,136 @@
+<!-- Category -->
+<div class="orders mt-5 p-5">
+    <div class="row">
+        <div class="col-xl-11 mx-auto category-top">
+            <div class="card">
+                <div class="full_container">
+                    <div class="inner_container">
+                        <!-- dashboard inner -->
+                        <h2 class="text-center mt-5 pt-5">Add Products</h2>
+                        <div class="w-75 mx-auto mt-5">
+                            <form class="p-5 border mb-5" action="/vendor/add-product/new" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="inputProduct4">Product Name</label>
+                                    <input required type="text" class="form-control inpfield" placeholder="Product Name"
+                                        name="name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputProduct4">Description</label>
+                                    <textarea required type="text" id="defaultRegisterFormEmail" class="form-control"
+                                        placeholder="Description" name="description"></textarea>
+                                </div>
+                                <div class="form-row mb-3">
+
+                                    <div class="form group col-md-6">
+                                        <label for="inputBrand4">Category</label>
+                                        <select required name="category" class="form-control ">
+                                            <option value="none" selected>Choose Category</option>
+                                            {{#each categoryData}}
+                                            <option>{{this.name}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="inputBrand4">Brand Name</label>
+                                        <input required type="text" class="form-control inpfield" name="brandName"
+                                            placeholder="Brand Name">
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-6">
+                                        <label for="inputStock4">Stock</label>
+                                        <input required type="number" class="form-control inpfield" name="quantity"
+                                            placeholder="Stock">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPricek4">Price</label>
+                                        <input required type="Price" class="form-control inpfield" name="price"
+                                            placeholder="Price">
+                                    </div>
+                                </div>
+                                <div class="form-row form_img">
+                                    <div class="grid">
+                                        <div class="form-element">
+                                            <input required type="file" id="file-1" accept="image/*" name="images">
+                                            <label for="file-1" id="file-1-preview">
+                                                <img src="https://bit.ly/3ubuq5o" alt="">
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-element">
+                                            <input required type="file" id="file-2" accept="image/*" name="images">
+                                            <label for="file-2" id="file-2-preview">
+                                                <img src="https://bit.ly/3ubuq5o" alt="">
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-element">
+                                            <input required type="file" id="file-3" accept="image/*" name="images">
+                                            <label for="file-3" id="file-3-preview">
+                                                <img src="https://bit.ly/3ubuq5o" alt="">
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-element">
+                                            <input required type="file" id="file-4" accept="image/*" name="images">
+                                            <label for="file-4" id="file-4-preview">
+                                                <img src="https://bit.ly/3ubuq5o" alt="">
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center mt-5">
+                                    <input class="btn btn-primary" type="submit" value="Submit">
+                                    
+                                    
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <!-- end dashboard inner -->
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- /.card -->
+    </div> <!-- /.col-lg-8 -->
+</div>
+</div>
+<!-- /.Category -->
+<script>
+    function previewBeforeUpload(id) {
+        document.querySelector("#" + id).addEventListener("change", function (e) {
+            if (e.target.files.length == 0) {
+                return;
+            }
+            let file = e.target.files[0];
+            let url = URL.createObjectURL(file);
+            document.querySelector("#" + id + "-preview div").innerText = file.name;
+            document.querySelector("#" + id + "-preview img").src = url;
+        });
+    }
+
+    previewBeforeUpload("file-1");
+    previewBeforeUpload("file-2");
+    previewBeforeUpload("file-3");
+    previewBeforeUpload("file-4");
+</script>
+
+

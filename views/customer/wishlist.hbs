@@ -1,0 +1,47 @@
+<!-- product_list start-->
+<section class="product_list section_padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="product_list_slider owl-carousel">
+          <div class="single_product_list_slider">
+            <div id="rlHere" class="row align-items-center">
+              {{#each productData}}
+              <div class="col-lg-3 col-sm-6">
+                            <div class="single_product_item">
+                                <img src="/uploads/{{this.productPictures.[0].filename}}" alt="">
+                                <div class="single_product_text">
+                                    <h4>{{this.name}}</h4>
+                                    <h3>Rs {{this.price}}</h3>
+                                    {{#if this.outOfStock}}
+                                    <p>Out of stock</p>
+                                    {{else}}
+                                    <div style="display:flex ;">
+                                        <span><a href="#" onclick="return cartAction('add','{{this._id}}')" class="add_cart">+ add to cart</a></span>
+                                        <span  class="ml-4"><a href="#" onclick="return wishlistAction('{{this._id}}','{{this.isWished}}','{{../wishlist}}')">
+                                            {{#if this.isWished}}
+                                            <i id="{{this._id}}" class="fa fa-heart ml-3"></i>
+                                            {{else}}
+                                            <i id="{{this._id}}" class="ti-heart ml-3 "></i>
+                                            {{/if}}
+                                            </a></span>
+                                    </div>
+                                    {{/if}}
+                                 
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+              {{/each}}
+              
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- product_list part start-->

@@ -1,0 +1,53 @@
+{{!-- SHOW ALL CATEGORY  LIST STARTS--}}
+        <div class="dash-container  mt-5 p-4">
+            <h4 class="text-center mb-5">Blocked vendors</h4>
+<section >
+
+   <div class="container shadow p-2">
+      
+        <table class="table display" id="vendor_req_table" >
+  <thead>
+    <tr>
+      
+      {{!-- <th scope="col">Index</th> --}}
+      <th scope="col">Full Name</th>
+      <th scope="col">Unblock</th>
+      {{!-- <th scope="col">options</th> --}}
+      
+    </tr>
+  </thead>
+  <tbody>
+      {{#each vendorData}}
+    <tr>
+     
+      {{!-- <td>{{inc @index}}</td> --}}
+      <td> {{this.fullName}}</td>
+      <td><a href="/admin/unblock-vendor/{{this._id}}"><button>Unblock</button></a></td>
+      
+       
+    </tr>
+
+
+    {{/each}}
+   
+  </tbody>
+</table>
+   </div>
+</section>
+        </div>
+<script>
+  $(document).ready(function () {
+
+
+    $('#user_table').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#vendor_req_table').DataTable();
+</script>
+
+
+
+ {{!-- SHOW ALL CATEGORY  LIST ends--}} 

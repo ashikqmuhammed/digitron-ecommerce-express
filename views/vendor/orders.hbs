@@ -1,0 +1,349 @@
+{{#if newOrders}}
+{{!-- SHOW ALL CATEGORY  LIST STARTS--}}
+        <div class="dash-container mt-5 p-4">
+          <h4 class="text-center mb-5">New Orders</h4>
+<section >
+
+   <div class="container shadow p-2">
+      
+        <table class="table " id="placed" >
+  <thead>
+    <tr>
+      
+      <th scope="col">INDEX</th>
+      <th scope="col">CUSTOMER</th>
+      <th scope="col">PRODUCT</th>
+      <th scope="col">PAYMENT TYPE</th>
+      <th scope="col">AMOUNT</th>
+      <th scope="col">QTY</th>
+      <th scope="col">STATUS</th>
+      <th scope="col">VIEW DETAILS</th>
+       
+      
+    </tr>
+  </thead>
+  <tbody>
+      {{#each newOrders}}
+    <tr>
+     
+      <td>{{inc @index}}</td>
+      <td> {{this.customerLookup.fullName}}</td>
+      <td> {{this.productLookup.name}}</td>
+      <td> {{this.orderLookup.paymentType}}</td>
+      <td> {{this.orderLookup.items.payablePrice}}</td>
+      <td> {{this.orderLookup.items.purchasedQty}}</td>
+      <td>
+       <a href="" class="mr-2 btn btn-success" onclick="return orderUpdate('packed','{{this.orderLookup._id}}','{{this.productLookup._id}}')">Mark as packed</a>
+      </td>
+      <td>
+        <a href="/admin/block-cat/{{this._id}}" class="ml-3 btn btn-primary" onclick="return confirm('are you sur to block  {{this.name}}')">View</a>
+      </td>
+    </tr>
+    
+    {{/each}}
+   
+  </tbody>
+</table>
+   </div>
+</section>
+
+
+<script>
+  $(document).ready(function () {
+
+
+    $('#user_table').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#placed').DataTable();
+</script>
+        </div>
+        
+ {{!-- SHOW ALL CATEGORY  LIST ends--}}
+{{/if}}
+
+
+{{#if packedOrders}}
+ {{!-- SHOW ALL CATEGORY  LIST STARTS--}}
+        <div class="dash-container mt-5 p-4">
+          <h4 class="text-center mb-5">Packed Orders</h4>
+<section >
+
+   <div class="container shadow p-2">
+      
+        <table class="table " id="packed" >
+  <thead>
+    <tr>
+      
+      <th scope="col">INDEX</th>
+      <th scope="col">CUSTOMER</th>
+      <th scope="col">PRODUCT</th>
+      <th scope="col">PAYMENT TYPE</th>
+      <th scope="col">AMOUNT</th>
+      <th scope="col">QTY</th>
+      <th scope="col">STATUS</th>
+      <th scope="col">VIEW DETAILS</th>
+       
+      
+    </tr>
+  </thead>
+  <tbody>
+      {{#each packedOrders}}
+    <tr>
+     
+      <td>{{inc @index}}</td>
+      <td> {{this.customerLookup.fullName}}</td>
+      <td> {{this.productLookup.name}}</td>
+      <td> {{this.orderLookup.paymentType}}</td>
+      <td> {{this.orderLookup.items.payablePrice}}</td>
+      <td> {{this.orderLookup.items.purchasedQty}}</td>
+      <td>
+       <a href="" class="mr-2 btn btn-success" onclick="return orderUpdate('shipped','{{this.orderLookup._id}}','{{this.productLookup._id}}')">Mark as shipped</a>
+      </td>
+      <td>
+        <a href="/admin/block-cat/{{this._id}}" class="ml-3 btn btn-primary" onclick="return confirm('are you sur to block  {{this.name}}')">View</a>
+      </td>
+    </tr>
+    
+    {{/each}}
+   
+  </tbody>
+</table>
+   </div>
+</section>
+<script>
+  $(document).ready(function () {
+
+
+    $('#user_table').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#packed').DataTable();
+</script>
+        </div>
+        
+ {{!-- SHOW ALL CATEGORY  LIST ends--}}
+
+{{/if}}
+
+
+{{#if shippedOrders}}
+ {{!-- SHOW ALL CATEGORY  LIST STARTS--}}
+        <div class="dash-container mt-5 p-4">
+          <h4 class="text-center mb-5">Shipped Orders</h4>
+<section >
+
+   <div class="container shadow p-2">
+      
+        <table class="table " id="shipped" >
+  <thead>
+    <tr>
+      
+      <th scope="col">INDEX</th>
+      <th scope="col">CUSTOMER</th>
+      <th scope="col">PRODUCT</th>
+      <th scope="col">PAYMENT TYPE</th>
+      <th scope="col">AMOUNT</th>
+      <th scope="col">QTY</th>
+      <th scope="col">STATUS</th>
+      <th scope="col">VIEW DETAILS</th>
+       
+      
+    </tr>
+  </thead>
+  <tbody>
+      {{#each shippedOrders}}
+    <tr>
+     
+      <td>{{inc @index}}</td>
+      <td> {{this.customerLookup.fullName}}</td>
+      <td> {{this.productLookup.name}}</td>
+      <td> {{this.orderLookup.paymentType}}</td>
+      <td> {{this.orderLookup.items.payablePrice}}</td>
+      <td> {{this.orderLookup.items.purchasedQty}}</td>
+      <td>
+        <a href="" class="mr-2 btn btn-success" onclick="return orderUpdate('delivered','{{this.orderLookup._id}}','{{this.productLookup._id}}')">Mark as delivered</a>
+      </td>
+      <td>
+        <a href="/admin/block-cat/{{this._id}}" class="ml-3 btn btn-primary" onclick="return confirm('are you sur to block  {{this.name}}')">View</a>
+      </td>
+    </tr>
+    
+    {{/each}}
+   
+  </tbody>
+</table>
+   </div>
+</section>
+<script>
+  $(document).ready(function () {
+
+
+    $('#user_table').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#shipped').DataTable();
+</script>
+        </div>
+        
+ {{!-- SHOW ALL CATEGORY  LIST ends--}}
+
+{{/if}}
+
+
+{{#if deliveredOrders}}
+ {{!-- SHOW ALL CATEGORY  LIST STARTS--}}
+        <div class="dash-container mt-5 p-4">
+          <h4 class="text-center mb-5">Delivered Orders</h4>
+<section >
+
+   <div class="container shadow p-2">
+      
+        <table class="table " id="delivered" >
+  <thead>
+    <tr>
+      
+      <th scope="col">INDEX</th>
+      <th scope="col">CUSTOMER</th>
+      <th scope="col">PRODUCT</th>
+      <th scope="col">PAYMENT TYPE</th>
+      <th scope="col">AMOUNT</th>
+      <th scope="col">QTY</th>
+      <th scope="col">STATUS</th>
+      <th scope="col">VIEW DETAILS</th>
+       
+      
+    </tr>
+  </thead>
+  <tbody>
+      {{#each deliveredOrders}}
+    <tr>
+     
+      <td>{{inc @index}}</td>
+      <td> {{this.customerLookup.fullName}}</td>
+      <td> {{this.productLookup.name}}</td>
+      <td> {{this.orderLookup.paymentType}}</td>
+      <td> {{this.orderLookup.items.payablePrice}}</td>
+      <td> {{this.orderLookup.items.purchasedQty}}</td>
+      <td>
+       <a href="" class="mr-2 btn btn-success" onclick="return false">Delivered</a>
+      </td>
+      <td>
+        <a href="/admin/block-cat/{{this._id}}" class="ml-3 btn btn-primary" onclick="return confirm('are you sur to block  {{this.name}}')">View</a>
+      </td>
+    </tr>
+    
+    {{/each}}
+   
+  </tbody>
+</table>
+   </div>
+</section>
+<script>
+  $(document).ready(function () {
+
+
+    $('#user_table').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#delivered').DataTable();
+</script>
+        </div>
+        
+ {{!-- SHOW ALL CATEGORY  LIST ends--}}
+
+{{/if}}
+
+
+
+{{#if cancelledOrders}}
+ {{!-- SHOW ALL CATEGORY  LIST STARTS--}}
+        <div class="dash-container mt-5 p-4">
+          <h4 class="text-center mb-5">Packed Orders</h4>
+<section >
+
+   <div class="container shadow p-2">
+      
+        <table class="table " id="packed" >
+  <thead>
+    <tr>
+      
+      <th scope="col">INDEX</th>
+      <th scope="col">CUSTOMER</th>
+      <th scope="col">PRODUCT</th>
+      <th scope="col">PAYMENT TYPE</th>
+      <th scope="col">AMOUNT</th>
+      <th scope="col">QTY</th>
+      <th scope="col">STATUS</th>
+      <th scope="col">VIEW DETAILS</th>
+       
+      
+    </tr>
+  </thead>
+  <tbody>
+      {{#each cancelledOrders}}
+    <tr>
+     
+      <td>{{inc @index}}</td>
+      <td> {{this.customerLookup.fullName}}</td>
+      <td> {{this.productLookup.name}}</td>
+      <td> {{this.orderLookup.paymentType}}</td>
+      <td> {{this.orderLookup.items.payablePrice}}</td>
+      <td> {{this.orderLookup.items.purchasedQty}}</td>
+      <td>
+        <!-- Example single danger button -->
+        <div class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{this.currentStatus.type}}
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Packed</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Cancel order</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Shipped</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Delivered</a>
+        </div>
+        </div>
+      </td>
+      <td>
+        <a href="/admin/block-cat/{{this._id}}" class="ml-3 btn btn-primary" onclick="return confirm('are you sur to block  {{this.name}}')">View</a>
+      </td>
+    </tr>
+    
+    {{/each}}
+   
+  </tbody>
+</table>
+   </div>
+</section>
+<script>
+  $(document).ready(function () {
+
+
+    $('#user_table').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#cancelled').DataTable();
+</script>
+        </div>
+        
+ {{!-- SHOW ALL CATEGORY  LIST ends--}}
+
+{{/if}}

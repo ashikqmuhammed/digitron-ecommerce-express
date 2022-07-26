@@ -1,0 +1,63 @@
+<!--================login_part Area =================-->
+    <section class="login_part padding_top">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="login_part_form">
+                        <div class="login_part_form_iner">
+                            <h3>Enter OTP</h3>
+                            {{#if otpErr}}
+                            <p class="errormessage text-danger" style="padding-left: 25px ;">Enter correct otp</p>
+                            {{/if}}
+                            <form class="row contact_form" action="/auth/otp-auth" method="post" id="password_auth" novalidate="novalidate">
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="password" class="form-control" id="password" name="otp"
+                                        placeholder="OTP">
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    {{!-- <div class="creat_account d-flex align-items-center">
+                                        <input type="checkbox" id="f-option" name="selector">
+                                        <label for="f-option">Remember me</label>
+                                    </div> --}}
+                                    <button type="submit" value="submit" class="btn_3">
+                                        Submit
+                                    </button>
+                                    {{!-- <a class="lost_pass" href="#">forget password?</a> --}}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================login_part end =================-->
+
+
+
+{{!-- <div class="wrapper">
+  <div class="logo">
+    <img
+      src="/customer/assets/images/hexalogo.jpg"
+      alt=""
+    />
+  </div>
+  <div class="text-center mt-4" style="color:#2a2a2a; font-weight:bolder" >
+    OTP
+  </div>
+  <form class="p-3 mt-5" action="/auth/otp-auth" method="post">
+
+  
+    
+
+  
+    
+    <div class="form-field d-flex align-items-center">
+      <span class="fas fa-key"></span>
+      <input type="password" name="otp"  placeholder="OTP" />
+    </div>
+    <button class="btn mt-3">Submit</button>
+  </form>
+
+
+</div> --}}

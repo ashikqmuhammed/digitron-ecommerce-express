@@ -1,0 +1,78 @@
+<section>
+  <div class="container">
+    <div class="row mt-5">
+     <h3 class="">Categories</h3>
+     <form action="/admin/addcategory" method="post">
+        <input name="category" type="text">
+        <button type="submit" class="btn btn-success ml-auto">Add Category</button>
+     </form>   
+    </div> 
+    
+    <table class="table mt-5 display" id="userTable_id">
+      <thead>
+        <tr>
+          
+          <th scope="col">Category</th>
+          <th scope="col">Edit/Delete</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        
+        {{#each categoryData}}
+            <tr>
+                <td >{{this.name}}</td>
+                <td colspan="2" >{{!-- modal button --}}
+
+<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{this._id}}">
+  Update
+</button>
+                <a href="/admin/delete-user/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you sure want to delete {{this.Fullname}}')">Delete</a></td>
+            </tr>
+      {{!-- Modal --}}
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+
+                  {{!-- Categories add box --}}
+
+<form class="form-inline mb-5 mt-5 " method="post" action="/admin/update-category/{{this._id}}"  >
+ 
+  <div class="form-group mx-sm-3 mb-2">
+    {{!-- <label for="inputPassword2" class="sr-only">Password</label> --}}
+    <input type="text" class="form-control" value="{{this.name}}" name="name" id="" placeholder="Update categories">
+  </div>
+  <button type="submit"  class="btn btn-primary mb-2">Update Categories</button>
+</form>      </div>
+      <div class="modal-footer">
+
+
+         <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        {{!-- <button type="button" class="btn btn-primary">Save changes</button>  --}}
+
+      </div>
+    </div>
+  </div>
+</div>
+        {{/each}}   
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+

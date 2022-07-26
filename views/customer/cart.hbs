@@ -1,0 +1,242 @@
+{{#unless cartData}}
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+body {
+    background-color: #eee;
+    font-family: 'Calibri', sans-serif !important;
+}
+
+.mt-100{
+   margin-top:100px;
+
+}
+
+
+.card {
+    height: 250%;
+    margin-bottom: 30px;
+    border: 0;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    letter-spacing: .5px;
+    border-radius: 8px;
+    -webkit-box-shadow: 1px 5px 24px 0 rgba(68,102,242,.05);
+    box-shadow: 1px 5px 24px 0 rgba(68,102,242,.05);
+}
+
+.card .card-header {
+    background-color: #fff;
+    border-bottom: none;
+    padding: 24px;
+    border-bottom: 1px solid #f6f7fb;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-header:first-child {
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+
+
+
+.card .card-body {
+    padding: 30px;
+    background-color: transparent;
+}
+
+.btn-primary, .btn-primary.disabled, .btn-primary:disabled {
+    background-color: #4466f2!important;
+    border-color: #4466f2!important;
+}
+</style>
+
+
+<div class="container-fluid  mt-100">
+				 <div class="row">
+				 
+					<div class="col-md-12">
+					
+							<div class="card">
+						
+						<div class="card-body cart">
+								<div class="col-sm-12 empty-cart-cls text-center">
+									<img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+									<h3><strong>Your Cart is Empty</strong></h3>
+									<h4>Add something to make me happy :)</h4>
+									<a href="/" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+									
+								
+								</div>
+						</div>
+				</div>
+						
+					
+					</div>
+				 
+				 </div>
+				
+				</div>
+{{/unless}}
+ 
+{{#if cartData}} 
+
+<!--================Checkout Area =================-->
+  <section class="checkout_area padding_top">
+    <div class="container">
+      
+      {{!-- <div class="cupon_area">
+        <div class="check_title">
+          <h2>
+            Have a coupon?
+            <a href="#">Click here to enter your code</a>
+          </h2>
+        </div>
+        <input type="text" placeholder="Enter coupon code" />
+        <a class="tp_btn" href="#">Apply Coupon</a>
+      </div> --}}
+      <div class="billing_details">
+        <div class="row">
+          <div class="col-lg-8">
+            
+        {{#each cartData}}
+        <div id="{{this.productLookup._id}}">
+          <div class="card-body p-4">
+            <div class="row d-flex justify-content-between align-items-center">
+              <div class="col-md-2 col-lg-2 col-xl-2">
+                <img
+                  src="/uploads/{{this.productLookup.productPictures.[0].filename}}" alt=""
+                  class="img-fluid rounded-3">
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-3">
+                <p class="lead fw-normal mb-2">{{this.productLookup.name}}</p>
+
+                    
+                  
+                    {{#if this.productLookup.blocked}}
+                    <p style="color:red;">Unavailable</p>
+                    {{else}}
+                    {{#if this.vendorLookup.blocked}}
+                    <p style="color:red;">Unavailable</p>
+                    {{else}}
+                    {{#if this.categoryLookup.blocked}}
+                    <p style="color:red;">Unavailable</p>
+                    {{else}}
+                    {{#if this.productLookup.outOfStock}}
+                    <p style="color:red;">Out of stock</p>
+                    {{else}}
+                    <p id="out{{this.productLookup._id}}" style="color:red;visibility:hidden">Out of stock</p>
+                    {{/if}}{{/if}}{{/if}}{{/if}}
+             
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                <button id="remove{{this.productLookup._id}}" class="btn btn-link px-2" 
+                  onclick="cartAction('remove','{{this.productLookup._id}}','{{this.productLookup.quantity}}')">
+                  <i class="fas fa-minus"></i>
+                </button>
+
+                <input id="qty{{this.productLookup._id}}" disabled min="0" name="quantity" value="{{this.cartItems.quantity}}" type="text"
+                  class="form-control form-control-sm" />
+                {{#if this.productLookup.blocked}}
+                    <button disabled id="add{{this.productLookup._id}}" class="btn btn-link px-2"
+                      onclick="cartAction('add','{{this.productLookup._id}}','{{this.productLookup.quantity}}')">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                    {{else}}
+                    {{#if this.vendorLookup.blocked}}
+                    <button disabled id="add{{this.productLookup._id}}" class="btn btn-link px-2"
+                      onclick="cartAction('add','{{this.productLookup._id}}','{{this.productLookup.quantity}}')">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                    {{else}}
+                    {{#if this.categoryLookup.blocked}}
+                    <button disabled id="add{{this.productLookup._id}}" class="btn btn-link px-2"
+                      onclick="cartAction('add','{{this.productLookup._id}}','{{this.productLookup.quantity}}')">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                    {{else}}
+                    {{#if this.productLookup.outOfStock}}
+                    <button disabled id="add{{this.productLookup._id}}" class="btn btn-link px-2"
+                      onclick="cartAction('add','{{this.productLookup._id}}','{{this.productLookup.quantity}}')">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                    {{else}}
+                    <button id="add{{this.productLookup._id}}" class="btn btn-link px-2"
+                      onclick="cartAction('add','{{this.productLookup._id}}','{{this.productLookup.quantity}}')">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                    {{/if}}{{/if}}{{/if}}{{/if}}
+                
+              </div>
+              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                    {{#if this.productLookup.outOfStock}}
+                    <h5 class="mb-0">Rs 0</h5>
+                    {{else}}{{#if this.productLookup.blocked}}
+                    <h5 class="mb-0">Rs 0</h5>
+                    {{else}}{{#if this.vendorLookup.blocked}}
+                    <h5 class="mb-0">Rs 0</h5>
+                    {{else}}{{#if this.categoryLookup.blocked}}
+                    <h5 class="mb-0">Rs 0</h5>
+                    {{else}}
+                    <span class="">Rs </span><span id="price{{this.productLookup._id}}" class="mb-0">{{this.total}}</span>
+                    {{/if}}{{/if}}
+                    {{/if}}{{/if}}
+                
+              </div>
+              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                <button style="background:none;border:none;" href="#!" onclick="cartAction('delete','{{this.productLookup._id}}')" class="text-danger"><i class="fas fa-trash fa-lg"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+        {{!-- <div class="card mb-4">
+          <div class="card-body p-4 d-flex flex-row">
+            <div class="form-outline flex-fill">
+              <input type="text" id="form1" class="form-control form-control-lg" />
+              <label class="form-label" for="form1">Discound code</label>
+            </div>
+            <button type="button" class="btn btn-outline-warning btn-lg ms-3">Apply</button>
+          </div>
+        </div> --}}
+
+        <div class="card">
+          <div class="card-body">
+            <a href="/checkout" class="btn btn-dark btn-block btn-lg">Proceed to Pay</a>
+          </div>
+        </div>
+
+      </div>
+
+
+          
+           <div class="col-lg-4">
+            <div class="order_box">
+              <h2>Price Details</h2>
+              <ul class="list list_2">
+                <li>
+                  <a href="#">Price
+                    <span><strong id="subTotal">{{cartSubTotal.[0].subTotal}}</strong><strong> Rs</strong></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Delivery charges
+                    <span>40 Rs</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Total Amount
+                    <span><strong id="total">{{cartSubTotal.[0].totalAmount}}</strong><strong> Rs</strong></span>
+                  </a>
+                </li>
+              </ul>
+          
+            </div>
+          </div>      
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Checkout Area =================-->
+
+{{/if}}

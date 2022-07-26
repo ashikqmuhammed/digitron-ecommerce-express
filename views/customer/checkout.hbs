@@ -1,0 +1,107 @@
+
+  
+
+<!--================Checkout Area =================-->
+  <section class="checkout_area padding_top">
+    <div class="container">
+      
+      {{!-- <div class="cupon_area">
+        <div class="check_title">
+          <h2>
+            Have a coupon?
+            <a href="#">Click here to enter your code</a>
+          </h2>
+        </div>
+        <input type="text" placeholder="Enter coupon code" />
+        <a class="tp_btn" href="#">Apply Coupon</a>
+      </div> --}}
+      <a class="mb-5 btn btn-dark btn-block" href="/address">Add new address</a>
+      <div class="billing_details">
+        {{#if addressData}}
+        <form id="checkout">
+            <div class="row">
+          <div class="col-lg-8">
+            
+        {{#each addressData}}
+        <div id="{{this.productLookup._id}}">
+          <div class="card">
+            <div class="card-header">
+              <input value="{{this._id}}" name="addressId"  id="{{this._id}}" type="radio">
+                <label class="" for="{{this._id}}">{{this.name}}</label>
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>{{this.name}}</p>
+                <p>{{this.address}}</p>
+                <p>{{this.locality}}</p>
+                <p>{{this.cityDistrictTown}}</p>
+                <p>{{this.pinCode}}</p>
+                <p>Mobile No. {{this.mobileNumber}}</p>
+                {{!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> --}}
+              </blockquote>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+     
+
+      </div>
+
+
+          
+           <div class="col-lg-4">
+            <div class="order_box">
+              <h2>Price Details</h2>
+              <ul class="list list_2">
+                <li>
+                  <a href="#">Price
+                    <span>{{cartSubTotal.[0].subTotal}} Rs</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Delivery charges
+                    <span>40 Rs</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Total Amount
+                    <span>{{cartSubTotal.[0].totalAmount}} Rs</span>
+                  </a>
+                </li>
+              </ul>
+
+              <div class="payment_item">
+                <div class="radion_btn">
+                  <input type="radio" id="cod" name="payment" value="cod" />
+                  <label for="cod">COD</label>
+                  <div class="check"></div>
+                </div>
+                <p>
+                  Please send a check to Store Name, Store Street, Store Town,
+                  Store State / County, Store Postcode.
+                </p>
+              </div>
+              <div class="payment_item active">
+                <div class="radion_btn">
+                  <input type="radio" id="online" name="payment" value="online"/>
+                  <label for="online">Razorpay </label>
+                  <img src="/customer/img/product/single-product/card.jpg" alt="" />
+                  <div class="check"></div>
+                </div>
+                <p>
+                  Please send a check to Store Name, Store Street, Store Town,
+                  Store State / County, Store Postcode.
+                </p>
+              </div>
+
+              <button class="btn btn-dark btn-block ml-3 mt-5" type="submit" value="Submit">Proceed to Razorpay</button>
+          
+            </div>
+          </div>      
+        </div>
+        </form>
+        {{/if}}
+      </div>
+    </div>
+  </section>
+  <!--================End Checkout Area =================-->

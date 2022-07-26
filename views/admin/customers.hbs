@@ -1,0 +1,113 @@
+<div id="cus-control">
+{{#if activeCustomerData}}
+{{!-- SHOW ALL CATEGORY  LIST STARTS--}}
+        <div class="dash-container mt-5 p-4">
+          <h4 class="text-center mb-5">Active Customers</h4>
+<section >
+
+   <div class="container shadow p-2">
+      
+        <table class="table " id="placed" >
+  <thead>
+    <tr>
+      
+      <th scope="col">INDEX</th>
+      <th scope="col">CUSTOMER</th>
+      <th scope="col">BLOCK</th>
+       
+      
+    </tr>
+  </thead>
+  <tbody>
+      {{#each activeCustomerData}}
+    <tr>
+     
+      <td>{{inc @index}}</td>
+      <td> {{this.fullName}}</td>
+      <td>
+        <a href="" class="ml-3 btn btn-primary" onclick="return customerControl('block','{{this._id}}')">Block</a>
+      </td>
+
+    </tr>
+    
+    {{/each}}
+   
+  </tbody>
+</table>
+   </div>
+</section>
+
+
+<script>
+  $(document).ready(function () {
+
+
+    $('#user_table').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#placed').DataTable();
+</script>
+        </div>
+        
+ {{!-- SHOW ALL CATEGORY  LIST ends--}}
+{{/if}}
+
+
+{{#if blockedCustomerData}}
+ {{!-- SHOW ALL CATEGORY  LIST STARTS--}}
+        <div class="dash-container mt-5 p-4">
+          <h4 class="text-center mb-5">Blocked Customers</h4>
+<section >
+
+   <div class="container shadow p-2">
+      
+        <table class="table " id="packed" >
+  <thead>
+    <tr>
+      
+      <th scope="col">INDEX</th>
+      <th scope="col">CUSTOMER</th>
+      <th scope="col">BLOCK</th>
+       
+      
+    </tr>
+  </thead>
+  <tbody>
+      {{#each blockedCustomerData}}
+    <tr>
+     
+      <td>{{inc @index}}</td>
+      <td> {{this.fullName}}</td>
+      <td>
+        <a href="" class="ml-3 btn btn-primary" onclick="return customerControl('unblock','{{this._id}}')">Unblock</a>
+      </td>
+
+    </tr>
+    
+    {{/each}}
+   
+  </tbody>
+</table>
+   </div>
+</section>
+<script>
+  $(document).ready(function () {
+
+
+    $('#user_table').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#packed').DataTable();
+</script>
+        </div>
+        
+ {{!-- SHOW ALL CATEGORY  LIST ends--}}
+
+{{/if}}
+</div>
